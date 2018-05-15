@@ -24,6 +24,23 @@ import { installOfflineWatcher } from 'pwa-helpers/network.js';
 import { installMediaQueryWatcher } from 'pwa-helpers/media-query.js';
 import { updateMetadata } from 'pwa-helpers/metadata.js';
 
+// var firebase = require('firebase/app');
+// import * as firebase from 'firebase';
+// import * as firebase from 'firebase/app';
+
+const config = {
+  apiKey: "AIzaSyDalUzdKWBCL1UHqzxcJs-t1FwVl76FQN4",
+  authDomain: "quotes-dc61f.firebaseapp.com",
+  databaseURL: "https://quotes-dc61f.firebaseio.com",
+  projectId: "quotes-dc61f",
+  storageBucket: "quotes-dc61f.appspot.com",
+  messagingSenderId: "27351817238"
+};
+
+// const app = firebase.initializeApp(config);
+
+// console.log(app);
+
 class MyApp extends LitElement {
   _render({appTitle, _page, _drawerOpened, _snackbarOpened, _offline}) {
     // Anything that's related to rendering should be done in here.
@@ -139,28 +156,6 @@ class MyApp extends LitElement {
         background: var(--app-drawer-background-color);
         color: var(--app-drawer-text-color);
         text-align: center;
-      }
-
-      /* Wide layout: when the viewport width is bigger than 460px, layout
-      changes to a wide layout. */
-      @media (min-width: 460px) {
-        .toolbar-list {
-          display: block;
-        }
-
-        .menu-btn {
-          display: none;
-        }
-
-        .main-content {
-          padding-top: 107px;
-        }
-
-        /* The drawer button isn't shown in the wide layout, so we don't
-        need to offset the title */
-        [main-title] {
-          padding-right: 0px;
-        }
       }
     </style>
 
@@ -286,10 +281,10 @@ class MyApp extends LitElement {
         // navigate to view1 page and my-view1.js is loaded
         break;
       case 'view2':
-        await import('../components/my-view2.js');
+        // await import('../components/my-view2.js');
         break;
       case 'view3':
-        await import('../components/my-view3.js');
+        // await import('../components/my-view3.js');
         break;
       default:
         page = 'view404';
