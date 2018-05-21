@@ -31,7 +31,7 @@ class MyView1 extends PageViewElement {
       <submit-quote></submit-quote>
     
       Eye chart:
-      <eye-chart scale="10"></eye-chart>
+      <eye-chart scale="25"></eye-chart>
       <eye-chart line="2" scale="25"></eye-chart>
     `;
   }

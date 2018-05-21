@@ -7,7 +7,6 @@ class EyeChart extends LitElement {
   constructor() {
     super();
     this.scale = 100;
-    this.line = false;
   }
 
   static get properties() {
@@ -30,8 +29,6 @@ class EyeChart extends LitElement {
     return newArray.join('');
   }
 
-
-
   _getLine(numberOfChars) {
     let line = []
     for (let i = 0; i < numberOfChars; i++) {
@@ -49,11 +46,7 @@ class EyeChart extends LitElement {
   }
 
   _render({ scale }) {
-    let chart;
-    if (this.line) chart = this._getChart(this.line, this.line);
-    else {
-      chart = this._getChart();
-    }
+    let chart = this._getChart(this.line, this.line);
     return html`
       <style>
         :host {
@@ -69,10 +62,10 @@ class EyeChart extends LitElement {
         li>span {}
       </style>
       <ul>
-        ${repeat(chart, (i) => i.id, (i, index) => html`
-        <li style$="font-size: ${this.scale / i.length}vw">
-          ${repeat(i, (i2) => i2.id, (i2, index) => html`
-          <span>${i2}</span>
+        ${repeat(chart, (line, index) => html`
+        <li style$="font-size: ${this.scale / line.length}vmin">
+          ${repeat(line, (char, index) => html`
+          <span>${char}</span>
           `)}
         </li>
         `)}
