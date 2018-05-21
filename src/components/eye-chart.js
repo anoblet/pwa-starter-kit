@@ -20,15 +20,6 @@ class EyeChart extends LitElement {
     return items[Math.floor(Math.random() * items.length)];
   }
 
-  _getRandomString() {
-    let newArray = [];
-
-    for (let i = 0; i < 26; i++) {
-      newArray.push(this._getRandom(characters));
-    }
-    return newArray.join('');
-  }
-
   _getLine(numberOfChars) {
     let line = []
     for (let i = 0; i < numberOfChars; i++) {
@@ -45,8 +36,7 @@ class EyeChart extends LitElement {
     return chart;
   }
 
-  _render({ scale }) {
-    let chart = this._getChart(this.line, this.line);
+  _styles() {
     return html`
       <style>
         :host {
@@ -61,16 +51,35 @@ class EyeChart extends LitElement {
       
         li>span {}
       </style>
+    `
+  }
+
+  _renderLine(line) {
+    return html`
+      ${repeat(line, (letter) => html`
+        <span>${letter}</span>
+      `)}
+    `
+  }
+
+  _renderChart(chart) {
+    return html`
       <ul>
-        ${repeat(chart, (line, index) => html`
-        <li style$="font-size: ${this.scale / line.length}vmin">
-          ${repeat(line, (char, index) => html`
-          <span>${char}</span>
-          `)}
-        </li>
+        ${repeat(chart, (line) => html`
+          <li style$="font-size: ${this.scale / line.length}vmin">
+            ${this._renderLine(line)}
+          </li>
         `)}
       </ul>
-    `;
+    `
+  }
+
+  _render({ scale }) {
+    let chart = this._getChart(this.line, this.line, scale);
+    return html`
+      ${this._styles()}
+      ${this._renderChart(chart)}
+    `
   }
 }
 
