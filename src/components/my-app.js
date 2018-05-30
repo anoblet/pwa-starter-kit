@@ -186,7 +186,7 @@ class MyApp extends LitElement {
 
     <!-- Main content -->
     <main class="main-content">
-      <my-view1 class="page" active?="${_page === 'view1'}"></my-view1>
+      <my-view1 class="page" active?="${_page === 'my-view1'}"></my-view1>
       <my-view2 class="page" active?="${_page === 'view2'}"></my-view2>
       <my-view3 class="page" active?="${_page === 'view3'}"></my-view3>
       <my-view404 class="page" active?="${_page === 'view404'}"></my-view404>
@@ -258,7 +258,7 @@ class MyApp extends LitElement {
 
   _locationChanged() {
     const path = window.decodeURIComponent(window.location.pathname);
-    const page = path === '/' ? 'view1' : path.slice(1);
+    const page = path === '/' ? 'my-view1' : path.slice(1);
     this._loadPage(page);
     // Any other info you might want to extract from the path (like page type),
     // you can do here.
@@ -274,22 +274,9 @@ class MyApp extends LitElement {
   }
 
   async _loadPage(page) {
-    switch(page) {
-      case 'view1':
-        await import('../components/my-view1.js');
-        // Put code here that you want it to run every time when
-        // navigate to view1 page and my-view1.js is loaded
-        break;
-      case 'view2':
-        // await import('../components/my-view2.js');
-        break;
-      case 'view3':
-        // await import('../components/my-view3.js');
-        break;
-      default:
-        page = 'view404';
-        await import('../components/my-view404.js');
-    }
+    await import('./' + page + '.js');
+    let e = document.createElement(page);
+    this.shadowRoot.querySelector('main').appendChild(e);
     this._page = page;
   }
 }
