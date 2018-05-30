@@ -178,18 +178,19 @@ class MyApp extends LitElement {
     <app-drawer opened="${_drawerOpened}"
         on-opened-changed="${e => this._updateDrawerState(e.target.opened)}">
       <nav class="drawer-list">
-        <a selected?="${_page === 'view1'}" href="/view1">View One</a>
-        <a selected?="${_page === 'view2'}" href="/view2">View Two</a>
-        <a selected?="${_page === 'view3'}" href="/view3">View Three</a>
+        <a selected?="${_page === 'view1'}" href="/home">View One</a>
+        <a selected?="${_page === 'view1'}" href="/eye-chart">View One</a>
       </nav>
     </app-drawer>
 
     <!-- Main content -->
     <main class="main-content">
+    <!--
       <my-view1 class="page" active?="${_page === 'my-view1'}"></my-view1>
       <my-view2 class="page" active?="${_page === 'view2'}"></my-view2>
       <my-view3 class="page" active?="${_page === 'view3'}"></my-view3>
       <my-view404 class="page" active?="${_page === 'view404'}"></my-view404>
+      -->
     </main>
 
     <footer>
