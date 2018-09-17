@@ -3,7 +3,7 @@ import { html } from '@polymer/lit-element';
 import '@vaadin/vaadin-text-field/vaadin-text-field.js';
 import '@material/mwc-textfield';
 
-const version = 3;
+const version = 4;
 
 const style = html`
   <style>
