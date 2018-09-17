@@ -144,28 +144,6 @@ class MyApp extends LitElement {
         color: var(--app-drawer-text-color);
         text-align: center;
       }
-
-      /* Wide layout: when the viewport width is bigger than 460px, layout
-      changes to a wide layout. */
-      @media (min-width: 460px) {
-        .toolbar-list {
-          display: block;
-        }
-
-        .menu-btn {
-          display: none;
-        }
-
-        .main-content {
-          padding-top: 107px;
-        }
-
-        /* The drawer button isn't shown in the wide layout, so we don't
-        need to offset the title */
-        [main-title] {
-          padding-right: 0px;
-        }
-      }
     </style>
 
     <!-- Header -->
@@ -195,9 +173,7 @@ class MyApp extends LitElement {
 
     <!-- Main content -->
     <main role="main" class="main-content">
-      <my-view1 class="page" active?="${_page === 'view1'}"></my-view1>
-      <my-view2 class="page" active?="${_page === 'view2'}"></my-view2>
-      <my-view3 class="page" active?="${_page === 'view3'}"></my-view3>
+      <page-home active?="${_page === 'page-home'}"></page-home>
       <my-view404 class="page" active?="${_page === 'view404'}"></my-view404>
     </main>
 
@@ -267,7 +243,7 @@ class MyApp extends LitElement {
 
   _locationChanged() {
     const path = window.decodeURIComponent(window.location.pathname);
-    const page = path === '/' ? 'view1' : path.slice(1);
+    const page = path === '/' ? 'page-home' : path.slice(1);
     this._loadPage(page);
     // Any other info you might want to extract from the path (like page type),
     // you can do here.
@@ -284,17 +260,8 @@ class MyApp extends LitElement {
 
   _loadPage(page) {
     switch(page) {
-      case 'view1':
-        import('../components/my-view1.js').then((module) => {
-          // Put code in here that you want to run every time when
-          // navigating to view1 after my-view1.js is loaded.
-        });
-        break;
-      case 'view2':
-        import('../components/my-view2.js');
-        break;
-      case 'view3':
-        import('../components/my-view3.js');
+      case 'page-home':
+        import('../components/PageHome/PageHome.js');
         break;
       default:
         page = 'view404';
