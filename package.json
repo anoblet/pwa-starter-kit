@@ -21,13 +21,17 @@
   },
   "dependencies": {
     "@material/mwc-button": "^0.1.2",
+    "@material/mwc-fab": "^0.2.0",
     "@material/mwc-formfield": "^0.1.2",
+    "@material/mwc-icon": "^0.2.0",
     "@polymer/app-layout": "^3.0.1",
     "@polymer/lit-element": "^0.5.2",
     "@vaadin/vaadin-form-layout": "^2.1.0",
     "@vaadin/vaadin-text-field": "^2.1.2",
     "@webcomponents/webcomponentsjs": "^2.1.2",
-    "pwa-helpers": "^0.8.3"
+    "pwa-helpers": "^0.8.3",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "axe-core": "^3.1.1",
