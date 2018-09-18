@@ -3,51 +3,46 @@ import { BaseElement } from '../BaseElement.js';
 import '@vaadin/vaadin-form-layout/vaadin-form-layout.js';
 
 export class Countdown extends BaseElement {
+
+  // Properties
   static get properties() {
     return {
       duration: Number,
       timeleft: Number,
-      icons: Boolean
+      nolabel: Boolean
     }
   }
 
   // Lifecycle functions
 
-  // ready() {
-  //   super.ready();
-  //   this.state = {
-  //     ...this.state,
-  //     duration: this.duration,
-  //     _timeleft: this.duration,
-  //     minutes: '00',
-  //     seconds: '00'
-  //   }
-  //   this._computeParts(this.state._timeleft);
-  // }
-
-  // _firstRendered() {
-  //   this._timeleft = this.duration;
-  // }
-
   // Events
 
   start() {
+    console.log('Here');
     // Set icon
     const icon = this._interval ? 'play_arrow' : 'pause';
     this.shadowRoot.querySelector('#start_pause').icon = icon;
 
-    // Set lavel
-    const label = this._interval ? 'Start' : 'Pause';
+    
+    // Set label if 'nolabel' is not set
+    let label = '';
+    if(!this['nolabel']) {
+      label = this._interval ? 'Start' : 'Pause';
+    }
+
+    // Set a label
     this.shadowRoot.querySelector('#start_pause').label = label;
 
-    // Stop the timer
-
-    if (this._interval) this.stop();
-    else {
-      this._interval = setInterval(() => {
-        this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: parseInt(this.timeleft) - 1 }, composed: true }));
-      }, 1000);
+    // If a timer is running, pause and return
+    if (this._interval) {
+      this.stop();
+      return;
     }
+
+    // Set and start a timer
+    this._interval = setInterval(() => {
+      this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: parseInt(this.timeleft) - 1 }, composed: true }));
+    }, 1000);
   }
 
   stop() {
@@ -55,11 +50,11 @@ export class Countdown extends BaseElement {
     this._interval = false;
   }
 
-  reset() {
+  reset(time) {
     if (this._interval) this.stop();
-    this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: this.duration }, composed: true }));
-    this._timeleft = this.duration;
-    this._computeParts(this._timeleft);
+    this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: time }, composed: true }));
+    //this._timeleft = this.duration;
+    // this._computeParts(this._timeleft);
   }
 
   /**

@@ -1,26 +1,25 @@
-export const UPDATE = 'UPDATE';
-
-export const update = (value) => {
+// Duration
+export const SET_DURATION = 'SET_DURATION';
+export const setDuration = (value) => {
   return {
-    type: UPDATE,
+    type: SET_DURATION,
     value
   };
 };
 
-export const UPDATE_DURATION = 'UPDATE_DURATION';
-
-export const updateDuration = (value) => {
+// Time left
+export const SET_TIMELEFT = 'SET_TIMELEFT';
+export const setTimeleft = (value) => {
   return {
-    type: UPDATE_DURATION,
+    type: SET_TIMELEFT,
     value
   };
 };
 
-export const UPDATE_TIMELEFT = 'UPDATE_TIMELEFT';
-
-export const updateTimeleft = (value) => {
+// Reset
+export const RESET = 'RESET';
+export const reset = () => {
   return {
-    type: UPDATE_TIMELEFT,
-    value
+    type: RESET
   };
 };

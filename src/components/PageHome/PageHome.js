@@ -2,7 +2,7 @@ import { PageElement } from '../PageElement.js';
 
 import { connect } from '../../../node_modules/pwa-helpers/connect-mixin.js';
 import { store } from '../../store.js';
-import { update, updateDuration, updateTimeleft } from '../../actions/page-home.js';
+import { setDuration, setTimeleft } from '../../actions/page-home.js';
 
 import '../Countdown/Countdown.js';
 import '@anoblet/time-field/time-field.js'
@@ -25,10 +25,10 @@ class PageHome extends connect(store)(PageElement) {
 
   _firstRendered() {
     this.addEventListener('duration-changed', function(e) {
-      store.dispatch(updateDuration(e.detail.time));
+      store.dispatch(setDuration(e.detail.time));
     });
     this.addEventListener('timeleft-changed', function(e) {
-      store.dispatch(updateTimeleft(e.detail.timeleft));
+      store.dispatch(setTimeleft(e.detail.timeleft));
     });
   }
 

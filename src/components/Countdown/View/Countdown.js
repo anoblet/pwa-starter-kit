@@ -18,7 +18,7 @@ export default function (props) {
         </style>
         <time-field time="${this.timeleft}"></time-field>
         <mwc-button id="start_pause" label="${this.icons ? 'Start' : ''}" icon="play_arrow" raised on-click="${() => this.start()}"></mwc-button>
-        <mwc-button id="start_pause" label="${this.icons ? 'Reset' : ''}" icon="refresh" raised on-click="${() => this.reset()}"></mwc-button>
+        <mwc-button id="start_pause" label="${this.icons ? 'Reset' : ''}" icon="refresh" raised on-click="${() => this.reset(this.duration)}"></mwc-button>
       `
     default:
       return html`
