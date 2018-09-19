@@ -23,6 +23,12 @@ class PageHome extends connect(store)(PageElement) {
     }
   }
 
+  /**
+   *  Observer/Store dispatcher(s)
+   *  Syntax: 
+   *    Listener: *property*-changed
+   *    Action: set*property*
+
   _firstRendered() {
     this.addEventListener('duration-changed', function(e) {
       store.dispatch(setDuration(e.detail.time));
@@ -31,6 +37,8 @@ class PageHome extends connect(store)(PageElement) {
       store.dispatch(setTimeleft(e.detail.timeleft));
     });
   }
+
+  // Syncronize with the store
 
   _stateChanged(state) {
     this.duration = state.timer.duration;
