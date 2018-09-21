@@ -5,7 +5,7 @@ import { store } from '../../store.js';
 import { setDuration, setTimeleft } from '../../actions/page-home.js';
 
 import '../Countdown/Countdown.js';
-import '@anoblet/time-field/time-field.js'
+import '../../../node_modules/@anoblet/time-field/time-field.js'
 
 class PageHome extends connect(store)(PageElement) {
   constructor() {
@@ -27,11 +27,12 @@ class PageHome extends connect(store)(PageElement) {
    *  Observer/Store dispatcher(s)
    *  Syntax: 
    *    Listener: *property*-changed
-   *    Action: set*property*
+   *    Action: set*Property*
+  */
 
   _firstRendered() {
     this.addEventListener('duration-changed', function(e) {
-      store.dispatch(setDuration(e.detail.time));
+      store.dispatch(setDuration(e.detail.duration));
     });
     this.addEventListener('timeleft-changed', function(e) {
       store.dispatch(setTimeleft(e.detail.timeleft));

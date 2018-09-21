@@ -44,7 +44,7 @@ export class BaseElement extends DefaultValue(CreateComponent(LitElement)) {
       });
     }
     else {
-      return this._template[View](props)
+      return this._template[View](props);
     }
   }
 
