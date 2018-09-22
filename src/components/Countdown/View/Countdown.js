@@ -1,6 +1,7 @@
 import { html } from '@polymer/lit-element';
-import { Button } from "@material/mwc-button"
-import Config from './Config.js'
+import "@material/mwc-button";
+import Config from './Config.js';
+import '../../PropertyEditor/PropertyEditor.js';
 
 const version = 3;
 
@@ -17,6 +18,7 @@ export default function (props) {
         ${style}
       </style>
       ${Config.bind(this)(props)}
+      <property-editor scope="${this}"></property-editor>
       <time-field time="${this.timeleft}"></time-field>
       <mwc-button id="start_pause" label="${this.getLabel()}" icon="${this.getIcon()}" raised on-click="${() => this.toggle()}"></mwc-button>
       <mwc-button id="reset" label="${this.icons ? 'Reset' : ''}" icon="refresh" raised on-click="${() => this.reset(this.duration)}"></mwc-button>

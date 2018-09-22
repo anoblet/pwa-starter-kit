@@ -11,7 +11,7 @@ export class Countdown extends BaseElement {
     return {
       duration: Number,
       timeleft: Number,
-      nolabel: Boolean,
+      // nolabel: Boolean,
       active: Boolean,
       icon: Boolean,
       label: Boolean
@@ -22,7 +22,6 @@ export class Countdown extends BaseElement {
     super(props);
     this.status = 'stopped';
     this.active = false;
-    this.nolabel = false;
     this.label = true;
     this.icon = true
   }
