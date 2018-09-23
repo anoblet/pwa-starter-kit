@@ -5,15 +5,17 @@ import { Checkbox } from '@material/mwc-checkbox'
 export default function (props) {
   const properties = this.scope.constructor.properties;
   const keys = Object.keys(properties);
-  console.log(this.scope);
+  const updateProp = (prop, value) => {
+    this.scope[prop] = value;
+    this.scope = false;
+  }
   return html`
     ${repeat(keys, (prop) => {
       const type = typeof(properties[prop]());
       return html`
         ${typeof(properties[prop]()) == 'boolean'? html`
           ${prop} = ${this.scope[prop]}
-          <input type="checkbox" checked="${this[prop]}" on-click="${() => this.scope[prop] = !this.scope[prop]}"/>
-          <mwc-checkbox checked="${this[prop]}" on-click="${() => this.scope[prop] = !this.scope[prop]}"></mwc-checkbox>
+          <mwc-checkbox checked="${this.scope[prop]}" on-click="${() => updateProp(prop, !this.scope[prop])}"></mwc-checkbox>
         ` : ''}
         ${typeof(properties[prop]()) == 'number'? html`
           ${prop} = ${this.scope[prop]}
@@ -26,4 +28,4 @@ export default function (props) {
       `
     })}
   `
-} 
+}

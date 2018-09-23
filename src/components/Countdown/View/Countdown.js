@@ -17,7 +17,6 @@ export default function (props) {
       <style>
         ${style}
       </style>
-      ${Config.bind(this)(props)}
       <property-editor scope="${this}"></property-editor>
       <time-field time="${this.timeleft}"></time-field>
       <mwc-button id="start_pause" label="${this.getLabel()}" icon="${this.getIcon()}" raised on-click="${() => this.toggle()}"></mwc-button>
