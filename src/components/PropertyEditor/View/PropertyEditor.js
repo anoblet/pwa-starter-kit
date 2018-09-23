@@ -7,8 +7,9 @@ export default function (props) {
   const properties = this.scope.constructor.properties;
   const keys = Object.keys(properties);
   const updateProp = (prop, value) => {
+    // Parent component gets updated correctly
     this.scope[prop] = value;
-    // Successfully updates the property-editor component with new values while using input, mwc-checkbox with on-change
+    // Successfully updates the property-editor component with scope's new values while using input, mwc-checkbox with on-change
     // Overwrites scope when using mwc-textfield with on-input and fails
     this.scope = false;
   }
