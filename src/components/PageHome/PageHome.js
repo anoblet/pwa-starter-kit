@@ -5,15 +5,12 @@ import { store } from '../../store.js';
 import { setDuration, setTimeleft } from '../../actions/page-home.js';
 
 import '../Countdown/Countdown.js';
-import '../../../node_modules/@anoblet/time-field/time-field.js'
 
 class PageHome extends connect(store)(PageElement) {
   constructor() {
     super();
     this.pageTitle = 'Home';
     this.pageContent = 'This is my content.';
-
-    // this.duration = 300;
   }
 
   static get properties() {
@@ -32,6 +29,7 @@ class PageHome extends connect(store)(PageElement) {
 
   _firstRendered() {
     this.addEventListener('duration-changed', function(e) {
+      console.log(e.detail);
       store.dispatch(setDuration(e.detail.duration));
     });
     this.addEventListener('timeleft-changed', function(e) {

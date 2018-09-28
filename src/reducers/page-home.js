@@ -5,7 +5,8 @@ const timer = (state = {duration: 300, timeleft: 300}, action) => {
     case SET_DURATION: {
       return {
         ...state,
-        'duration': action.value
+        'duration': action.value,
+        'timeleft': action.value
       }
     }
     case SET_TIMELEFT: {

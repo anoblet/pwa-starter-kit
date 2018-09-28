@@ -7,16 +7,19 @@ import { DefaultValue } from '../mixins/DefaultValue';
  * Style will be strictly asthetic
  */
 
-export class BaseElement extends DefaultValue(CreateComponent(LitElement)) {
+export class BaseElement extends DefaultValue(LitElement) {
   constructor(props) {
     super(props);
-    this.name = this.constructor.name;
+    this._name = this.constructor.name;
     this._template = [];
     this._setDefaultValues();
   }
 
   static get properties() {
     return {
+      _name: {
+        type: String
+      },
       _baseDir: {
         type: String,
         value: false
@@ -33,12 +36,12 @@ export class BaseElement extends DefaultValue(CreateComponent(LitElement)) {
   }
 
   _render(props) {
-    return this.view(this.name, props);
+    return this.view(this._name, props);
   }
 
   View(View, props) {
     if (!this._template[View]) {
-      import(`/src/components/${this.name}/View/${View}.js`).then((module) => {
+      import(`/src/components/${View}/View/${View}.js`).then((module) => {
         this._template[View] = module.default.bind(this);
         this.requestRender();
       });

@@ -1,7 +1,8 @@
 import { html } from '@polymer/lit-element';
 import "@material/mwc-button";
-import Config from './Config.js';
-import '../../PropertyEditor/PropertyEditor.js';
+import '../../time-field/time-field.js'
+
+import { PropertyEditor } from '../../../templates/PropertyEditor'
 
 const version = 3;
 
@@ -17,9 +18,9 @@ export default function (props) {
       <style>
         ${style}
       </style>
-      <property-editor scope="${this}"></property-editor>
-      <time-field time="${this.timeleft}"></time-field>
-      <mwc-button id="start_pause" label="${this.getLabel()}" icon="${this.getIcon()}" raised on-click="${() => this.toggle()}"></mwc-button>
+      ${PropertyEditor.bind(this)(props)}
+      <time-field time="${this._timeleft}"></time-field><mwc-button icon="edit" on-click="${e => this._root.querySelector("time-field").editable = true}""></mwc-button>
+      <mwc-button id="toggle" label="${this.getLabel()}" icon="${this.getIcon()}" raised on-click="${() => this.toggle()}"></mwc-button>
       <mwc-button id="reset" label="${this.icons ? 'Reset' : ''}" icon="refresh" raised on-click="${() => this.reset(this.duration)}"></mwc-button>
     `
     case 2:

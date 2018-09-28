@@ -1,75 +1,79 @@
 import { BaseElement } from '../BaseElement.js';
 import {repeat} from 'lit-html/lib/repeat';
-// import '@vaadin/vaadin-form-layout/vaadin-form-layout.js';
 
-
+/**
+ * API
+ * ==========
+ * 
+ */
 
 export class Countdown extends BaseElement {
-
-  // Properties
   static get properties() {
     return {
       duration: Number,
-      timeleft: Number,
-      // nolabel: Boolean,
-      active: Boolean,
       icon: Boolean,
-      label: Boolean
+      label: Boolean,
+      autostart: Boolean,
+      _active: Boolean,
+      _timeleft: Number,
     }
   }
 
   constructor(props) {
     super(props);
-    this.status = 'stopped';
-    this.active = false;
     this.label = true;
-    this.icon = true
+    this.icon = true;
+    this.autostart = false;
+    this._active = false;
+    this._timeleft  = 0;
+  }
+
+  // Lifecycle
+  _firstRendered(props) {
+    if(this.autostart) this.start();
   }
 
   // Events
   toggle() {
-    this.active ? this.pause() : this.start();
-    this.active = !this.active;
-    // Set icon
-    const icon = this.active ? 'pause' : 'play_arrow';
-    //this.shadowRoot.querySelector('#start_pause').icon = icon;
-
-    // If the 'nolabel' attribute is not set, set a label.
-    const label = this['nolabel'] ? '' : this.active ? 'Start' : 'Pause';
-    //this.shadowRoot.querySelector('#start_pause').label = label;
+    this._active ? this.pause() : this.start();
+    this._active = !this._active;
   }
 
   getLabel() {
-    return this.label ? this.active ? 'Pause' : 'Start' : '';
+    return this.label ? this._active ? 'Pause' : 'Start' : '';
   }
 
   getIcon() {
-    return this.icon ? this.active ? 'pause' : 'play_arrow' : '';
+    return this.icon ? this._active ? 'pause' : 'play_arrow' : '';
   }
 
   pause() {
     clearInterval(this._interval);
+    this._interval = false;
   }
 
   // Timer starts
   start() {
     this._interval = setInterval(() => {
-      this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: parseInt(this.timeleft) - 1 }, composed: true }));
+      this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: parseInt(this._timeleft) - 1 }, composed: true }));
     }, 1000);
+    // this._active = true;
   }
 
   stop() {
     clearInterval(this._interval);
     this._interval = false;
+    this._active = false;
   }
 
   reset(time) {
     if (this._interval) this.stop();
-    this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: time }, composed: true }));
+    this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: this.duration }, composed: true }));
   }
 
   /**
    * @duration string
+   * @deprecated
    */
 
   setDuration(duration) {
@@ -83,7 +87,6 @@ export class Countdown extends BaseElement {
   }
 
   // Helpers
-
   toSeconds(time) {
     const parts = time.split(':');
     return (parseInt(parts[0]) * 60) + parseInt(parts[1]);
