@@ -1,5 +1,4 @@
 import { BaseElement } from '../BaseElement.js';
-import {repeat} from 'lit-html/lib/repeat';
 
 /**
  * API
@@ -21,16 +20,19 @@ export class Countdown extends BaseElement {
 
   constructor(props) {
     super(props);
-    this.label = true;
     this.icon = true;
+    this.label = true;
     this.autostart = false;
     this._active = false;
-    this._timeleft  = 0;
+    this._timeleft = 0;
   }
 
   // Lifecycle
   _firstRendered(props) {
-    if(this.autostart) this.start();
+    if (this.autostart) this.start();
+    this.addEventListener('time-changed', function (e) {
+      this.dispatchEvent(new CustomEvent('duration-changed', { detail: { duration: e.detail.time }, composed: true }));
+    });
   }
 
   // Events

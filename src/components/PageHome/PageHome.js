@@ -29,7 +29,6 @@ class PageHome extends connect(store)(PageElement) {
 
   _firstRendered() {
     this.addEventListener('duration-changed', function(e) {
-      console.log(e.detail);
       store.dispatch(setDuration(e.detail.duration));
     });
     this.addEventListener('timeleft-changed', function(e) {

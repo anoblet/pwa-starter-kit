@@ -1,6 +1,6 @@
 import { html } from '@polymer/lit-element';
 import "@material/mwc-button";
-import '../../time-field/time-field.js'
+import '../../TimeField/TimeField'
 
 import { PropertyEditor } from '../../../templates/PropertyEditor'
 
@@ -19,7 +19,7 @@ export default function (props) {
         ${style}
       </style>
       ${PropertyEditor.bind(this)(props)}
-      <time-field time="${this._timeleft}"></time-field><mwc-button icon="edit" on-click="${e => this._root.querySelector("time-field").editable = true}""></mwc-button>
+      <time-field time="${this._timeleft}"></time-field><mwc-button icon="edit" on-click="${e => this._root.querySelector("time-field").editable = !this._root.querySelector("time-field").editable}""></mwc-button>
       <mwc-button id="toggle" label="${this.getLabel()}" icon="${this.getIcon()}" raised on-click="${() => this.toggle()}"></mwc-button>
       <mwc-button id="reset" label="${this.icons ? 'Reset' : ''}" icon="refresh" raised on-click="${() => this.reset(this.duration)}"></mwc-button>
     `
