@@ -1,0 +1,3 @@
+[submodule "src/components/component-countdown"]
+	path = src/components/component-countdown
+	url = https://github.com/anoblet/component-countdown.git

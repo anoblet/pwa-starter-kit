@@ -1,11 +1,5 @@
 import { BaseElement } from '../BaseElement.js';
 
-/**
- * API
- * ==========
- * 
- */
-
 export class Countdown extends BaseElement {
   static get properties() {
     return {
@@ -37,9 +31,11 @@ export class Countdown extends BaseElement {
 
   // Events
   toggle() {
-    this._active ? this.pause() : this.start();
+    this._active ? this.stop() : this.start();
     this._active = !this._active;
   }
+
+  // ES6 Properties and concerns:
 
   getLabel() {
     return this.label ? this._active ? 'Pause' : 'Start' : '';
@@ -49,27 +45,19 @@ export class Countdown extends BaseElement {
     return this.icon ? this._active ? 'pause' : 'play_arrow' : '';
   }
 
-  pause() {
-    clearInterval(this._interval);
-    this._interval = false;
-  }
-
   // Timer starts
   start() {
     this._interval = setInterval(() => {
       this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: parseInt(this._timeleft) - 1 }, composed: true }));
     }, 1000);
-    // this._active = true;
   }
 
   stop() {
-    clearInterval(this._interval);
-    this._interval = false;
-    this._active = false;
+    if(this._interval) clearInterval(this._interval);
   }
 
   reset(time) {
-    if (this._interval) this.stop();
+    this.stop();
     this.dispatchEvent(new CustomEvent('timeleft-changed', { detail: { timeleft: this.duration }, composed: true }));
   }
 
